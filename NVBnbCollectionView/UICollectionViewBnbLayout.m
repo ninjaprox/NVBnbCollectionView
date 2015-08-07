@@ -179,11 +179,7 @@ NSInteger kSubgroupPadding = 20;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    
-    NSLog(@"layoutAttributesForItemAtIndexPath");
-    attributes.frame = CGRectMake(0, 0, 100, 100);
-    
+    UICollectionViewLayoutAttributes *attributes = [mCellAtributes objectForKey:indexPath];
     
     return attributes;
 }
