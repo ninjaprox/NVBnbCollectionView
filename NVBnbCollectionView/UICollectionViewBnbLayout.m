@@ -55,7 +55,7 @@ NSInteger kSubgroupPadding = 20;
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:kSection];
     
     // Calculate content height
-    kGroupFullHeight = kGridCellHeigth * 6 + kGridCellVerticalSpacing * 4 + kParallaxItemHeight * 2 + kSubgroupPadding + 4;
+    kGroupFullHeight = kGridCellHeigth * 6 + kGridCellVerticalSpacing * 4 + kParallaxItemHeight * 2 + kSubgroupPadding * 4;
     mContentHeight = kGroupFullHeight * numberOfItems / 10;
     
     NSInteger numberOfItemsInLastGroup = numberOfItems % 10;
