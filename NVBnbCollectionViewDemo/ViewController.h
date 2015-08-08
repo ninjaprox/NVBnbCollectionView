@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+#import "NVBnbCollectionView.h"
 
+@interface ViewController : UIViewController <NVBnbCollectionViewDataSource>
 
 @end
 
