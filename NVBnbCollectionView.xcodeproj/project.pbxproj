@@ -14,7 +14,7 @@
 		233C8FA51B74C1F800257C94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 233C8FA41B74C1F800257C94 /* Images.xcassets */; };
 		233C8FA81B74C1F800257C94 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 233C8FA61B74C1F800257C94 /* LaunchScreen.xib */; };
 		233C8FB41B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FB31B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m */; };
-		233C8FC01B75016C00257C94 /* UICollectionViewBnbLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */; };
+		233C8FC01B75016C00257C94 /* NVBnbCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */; };
 		233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +42,8 @@
 		233C8FAD1B74C1F800257C94 /* NVBnbCollectionViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NVBnbCollectionViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		233C8FB21B74C1F800257C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		233C8FB31B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionViewDemoTests.m; sourceTree = "<group>"; };
-		233C8FBE1B75016C00257C94 /* UICollectionViewBnbLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewBnbLayout.h; sourceTree = "<group>"; };
-		233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewBnbLayout.m; sourceTree = "<group>"; };
+		233C8FBE1B75016C00257C94 /* NVBnbCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBnbCollectionViewLayout.h; sourceTree = "<group>"; };
+		233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionViewLayout.m; sourceTree = "<group>"; };
 		233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBnbCollectionView.h; sourceTree = "<group>"; };
 		233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,8 +130,8 @@
 		233C8FBD1B74C2FB00257C94 /* NVBnbCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				233C8FBE1B75016C00257C94 /* UICollectionViewBnbLayout.h */,
-				233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */,
+				233C8FBE1B75016C00257C94 /* NVBnbCollectionViewLayout.h */,
+				233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */,
 				233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */,
 				233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */,
 			);
@@ -240,7 +240,7 @@
 				233C8FA01B74C1F800257C94 /* ViewController.m in Sources */,
 				233C8F9D1B74C1F800257C94 /* AppDelegate.m in Sources */,
 				233C8F9A1B74C1F800257C94 /* main.m in Sources */,
-				233C8FC01B75016C00257C94 /* UICollectionViewBnbLayout.m in Sources */,
+				233C8FC01B75016C00257C94 /* NVBnbCollectionViewLayout.m in Sources */,
 				233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

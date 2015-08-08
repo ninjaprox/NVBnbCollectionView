@@ -19,7 +19,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="afI-RB-9g6" customClass="NVBnbCollectionView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="0.25879151700000003" blue="0.26982548499999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="H3H-Wv-ouU" customClass="UICollectionViewBnbLayout"/>
+                                <collectionViewLayout key="collectionViewLayout" id="H3H-Wv-ouU" customClass="NVBnbCollectionViewLayout"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xra-wz-W97">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
