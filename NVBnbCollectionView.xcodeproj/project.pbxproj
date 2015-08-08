@@ -15,6 +15,7 @@
 		233C8FA81B74C1F800257C94 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 233C8FA61B74C1F800257C94 /* LaunchScreen.xib */; };
 		233C8FB41B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FB31B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m */; };
 		233C8FC01B75016C00257C94 /* UICollectionViewBnbLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */; };
+		233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		233C8FB31B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionViewDemoTests.m; sourceTree = "<group>"; };
 		233C8FBE1B75016C00257C94 /* UICollectionViewBnbLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewBnbLayout.h; sourceTree = "<group>"; };
 		233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewBnbLayout.m; sourceTree = "<group>"; };
+		233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBnbCollectionView.h; sourceTree = "<group>"; };
+		233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +132,8 @@
 			children = (
 				233C8FBE1B75016C00257C94 /* UICollectionViewBnbLayout.h */,
 				233C8FBF1B75016C00257C94 /* UICollectionViewBnbLayout.m */,
+				233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */,
+				233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */,
 			);
 			path = NVBnbCollectionView;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				233C8F9D1B74C1F800257C94 /* AppDelegate.m in Sources */,
 				233C8F9A1B74C1F800257C94 /* main.m in Sources */,
 				233C8FC01B75016C00257C94 /* UICollectionViewBnbLayout.m in Sources */,
+				233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
