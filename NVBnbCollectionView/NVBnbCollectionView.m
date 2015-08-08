@@ -8,18 +8,14 @@
 
 #import "NVBnbCollectionView.h"
 
-@implementation NVBnbCollectionView
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self.dataSource = self;
-    
-    return [super initWithCoder:aDecoder];
+@implementation NVBnbCollectionView {
+    __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self.dataSource = self;
+- (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
+    [super setDataSource:self];
     
-    return [super initWithFrame:frame];
+    _bnbDataSource = (id<NVBnbCollectionViewDataSource>) dataSource;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -29,24 +25,24 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if ([self.bnbDataSource respondsToSelector:@selector(numberOfItemsInCollectionView:)]) {
-        return [self.bnbDataSource numberOfItemsInCollectionView:self];
+    if ([_bnbDataSource respondsToSelector:@selector(numberOfItemsInBnbCollectionView:)]) {
+        return [_bnbDataSource numberOfItemsInBnbCollectionView:self];
     }
     
     return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (![self.bnbDataSource respondsToSelector:@selector(collectionView:cellForItemAtIndexPath:)]
-        || ![self.bnbDataSource respondsToSelector:@selector(collectionView:parallaxCellForItemAtIndexPath:)]) {
+    if (![_bnbDataSource respondsToSelector:@selector(bnbCollectionView:cellForItemAtIndexPath:)]
+        || ![_bnbDataSource respondsToSelector:@selector(bnbCollectionView:parallaxCellForItemAtIndexPath:)]) {
         return nil;
     }
     
     if ((indexPath.row % 10 % 3 == 0) && (indexPath.row % 10 / 3 % 2 == 1)) {
-        return [self.bnbDataSource collectionView:self parallaxCellForItemAtIndexPath:indexPath];
+        return [_bnbDataSource bnbCollectionView:self parallaxCellForItemAtIndexPath:indexPath];
     }
     
-    return [self.bnbDataSource collectionView:self cellForItemAtIndexPath:indexPath];
+    return [_bnbDataSource bnbCollectionView:self cellForItemAtIndexPath:indexPath];
 }
 
 @end

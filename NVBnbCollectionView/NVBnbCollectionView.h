@@ -12,14 +12,12 @@
 
 @protocol NVBnbCollectionViewDataSource <NSObject>
 
-- (NSInteger)numberOfItemsInCollectionView:(NVBnbCollectionView *)collectionView;
-- (UICollectionViewCell *)collectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
-- (UICollectionViewCell *)collectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (NSInteger)numberOfItemsInBnbCollectionView:(NVBnbCollectionView *)collectionView;
+- (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 @interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource>
-
-@property (weak, nonatomic) id <NVBnbCollectionViewDataSource> bnbDataSource;
 
 @end
