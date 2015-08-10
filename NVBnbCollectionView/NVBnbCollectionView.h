@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class NVBnbCollectionView;
+@class NVBnbCollectionViewParallaxCell;
 
 @protocol NVBnbCollectionViewDataSource <NSObject>
 
 - (NSInteger)numberOfItemsInBnbCollectionView:(NVBnbCollectionView *)collectionView;
 - (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
-- (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (NVBnbCollectionViewParallaxCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

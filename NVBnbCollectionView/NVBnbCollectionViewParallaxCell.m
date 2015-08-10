@@ -45,7 +45,7 @@
     
     // Add constraints
     _parallaxImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    _parallaxImageViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:2 constant:0];
+    _parallaxImageViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
     _parallaxImageViewCenterYConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
@@ -60,6 +60,11 @@
 
 - (void)setParallaxImageOffset:(CGPoint)parallaxImageOffset {
     _parallaxImageViewCenterYConstraint.constant = parallaxImageOffset.y;
+}
+
+- (void)setMaxParallaxOffset:(CGFloat)maxParallaxOffset {
+    _maxParallaxOffset = maxParallaxOffset;
+    _parallaxImageViewHeightConstraint.constant = 2 * maxParallaxOffset;
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "NVBnbCollectionView.h"
 
 #import "NVBnbCollectionViewParallaxCell.h"
+#import "NVBnbCollectionViewLayout.h"
 
 @implementation NVBnbCollectionView {
     __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
@@ -57,7 +58,12 @@
     }
     
     if ((indexPath.row % 10 % 3 == 0) && (indexPath.row % 10 / 3 % 2 == 1)) {
-        return [_bnbDataSource bnbCollectionView:self parallaxCellForItemAtIndexPath:indexPath];
+        NVBnbCollectionViewParallaxCell *cell = [_bnbDataSource bnbCollectionView:self parallaxCellForItemAtIndexPath:indexPath];
+        NVBnbCollectionViewLayout *layout = (NVBnbCollectionViewLayout *) collectionView.collectionViewLayout;
+        
+        cell.maxParallaxOffset = layout.maxParallaxOffset;
+        
+        return cell;
     }
     
     return [_bnbDataSource bnbCollectionView:self cellForItemAtIndexPath:indexPath];
@@ -70,16 +76,18 @@
     
     for (UICollectionViewCell *cell in visibleCells) {
         if ([cell isKindOfClass:[NVBnbCollectionViewParallaxCell class]]) {
+            NVBnbCollectionViewParallaxCell *parallaxCell = (NVBnbCollectionViewParallaxCell *) cell;
+            
             CGRect bounds = self.bounds;
             CGPoint boundsCenter = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-            CGPoint cellCenter = cell.center;
+            CGPoint cellCenter = parallaxCell.center;
             CGPoint offsetFromCenter = CGPointMake(boundsCenter.x - cellCenter.x, boundsCenter.y - cellCenter.y);
-            CGSize cellSize = cell.bounds.size;
+            CGSize cellSize = parallaxCell.bounds.size;
             CGFloat maxVerticalOffset = (bounds.size.height / 2) + (cellSize.height / 2);
-            CGFloat scaleFactor = 30. / maxVerticalOffset;
+            CGFloat scaleFactor = parallaxCell.maxParallaxOffset / maxVerticalOffset;
             CGPoint parallaxOffset = CGPointMake(0.0, -offsetFromCenter.y * scaleFactor);
             
-            ((NVBnbCollectionViewParallaxCell *) cell).parallaxImageOffset = parallaxOffset;
+            parallaxCell.parallaxImageOffset = parallaxOffset;
         }
     }
 }

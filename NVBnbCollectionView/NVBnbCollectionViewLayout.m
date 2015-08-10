@@ -17,6 +17,7 @@
 #define PARALLAX_CELL_HEIGHT 200
 #define NUMBER_OF_ITEMS_IN_GROUP 10
 #define SECTION 0
+#define MAX_PARALLAX_OFFSET 50
 
 // For fixed layout, group 10 items to one group
 // Each group has the following layout:
@@ -202,6 +203,7 @@
     self.gridCellHorizontalSpacing = GRID_CELL_HORIZONTAL_SPACING;
     self.gridCellVerticalSpacing = GRID_CELL_VERTICAL_SPACING;
     self.gridPadding = GRID_PADDING;
+    self.maxParallaxOffset = MAX_PARALLAX_OFFSET;
 }
 
 @end

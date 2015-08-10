@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) UIImage *parallaxImage;
 @property (nonatomic) CGPoint parallaxImageOffset;
+@property (nonatomic) CGFloat maxParallaxOffset;
 
 @end

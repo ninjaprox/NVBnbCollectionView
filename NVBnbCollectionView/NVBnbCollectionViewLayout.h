@@ -17,5 +17,6 @@
 @property (nonatomic) CGFloat gridCellHorizontalSpacing;
 @property (nonatomic) CGFloat gridCellVerticalSpacing;
 @property (nonatomic) CGFloat gridPadding;
+@property (nonatomic) CGFloat maxParallaxOffset;
 
 @end
