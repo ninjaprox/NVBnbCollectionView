@@ -195,7 +195,9 @@
 }
 
 - (void)setDefaultValues {
+    self.gridCellWidth = GRID_CELL_WIDTH;
     self.gridCellHeight = GRID_CELL_HEIGHT;
+    self.parallaxCellWidth = PARALLAX_CELL_WIDTH;
     self.parallaxCellHeight = PARALLAX_CELL_HEIGHT;
     self.gridCellHorizontalSpacing = GRID_CELL_HORIZONTAL_SPACING;
     self.gridCellVerticalSpacing = GRID_CELL_VERTICAL_SPACING;

@@ -8,8 +8,26 @@
 
 #import "NVBnbCollectionView.h"
 
+#import "NVBnbCollectionViewParallaxCell.h"
+
 @implementation NVBnbCollectionView {
     __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.delegate = self;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.delegate = self;
+    }
+    
+    return self;
 }
 
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
@@ -43,6 +61,27 @@
     }
     
     return [_bnbDataSource bnbCollectionView:self cellForItemAtIndexPath:indexPath];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSArray *visibleCells = self.visibleCells;
+    
+    for (UICollectionViewCell *cell in visibleCells) {
+        if ([cell isKindOfClass:[NVBnbCollectionViewParallaxCell class]]) {
+            CGRect bounds = self.bounds;
+            CGPoint boundsCenter = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+            CGPoint cellCenter = cell.center;
+            CGPoint offsetFromCenter = CGPointMake(boundsCenter.x - cellCenter.x, boundsCenter.y - cellCenter.y);
+            CGSize cellSize = cell.bounds.size;
+            CGFloat maxVerticalOffset = (bounds.size.height / 2) + (cellSize.height / 2);
+            CGFloat scaleFactor = 30. / maxVerticalOffset;
+            CGPoint parallaxOffset = CGPointMake(0.0, -offsetFromCenter.y * scaleFactor);
+            
+            ((NVBnbCollectionViewParallaxCell *) cell).parallaxImageOffset = parallaxOffset;
+        }
+    }
 }
 
 @end

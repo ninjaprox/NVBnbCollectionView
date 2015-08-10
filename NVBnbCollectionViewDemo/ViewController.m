@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "NVBnbCollectionViewParallaxCell.h"
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -38,17 +40,11 @@
 }
 
 - (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    NVBnbCollectionViewParallaxCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"parallaxCell" forIndexPath:indexPath];
     UILabel *label;
     
-    if (cell.contentView.subviews.count == 0) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-        [cell.contentView addSubview:label];
-    } else {
-        label = cell.contentView.subviews[0];
-    }
-    
     cell.backgroundColor = [UIColor whiteColor];
+    cell.parallaxImage = [UIImage imageNamed:[NSString stringWithFormat:@"image_%d", 1]];
     label.text = [[NSString alloc] initWithFormat:@"%ld", (long)indexPath.row];
     
     return cell;

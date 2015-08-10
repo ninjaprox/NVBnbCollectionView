@@ -18,6 +18,6 @@
 
 @end
 
-@interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource>
+@interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource, UIScrollViewDelegate>
 
 @end

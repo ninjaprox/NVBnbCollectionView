@@ -16,6 +16,7 @@
 		233C8FB41B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FB31B74C1F800257C94 /* NVBnbCollectionViewDemoTests.m */; };
 		233C8FC01B75016C00257C94 /* NVBnbCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */; };
 		233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */; };
+		233C8FCC1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8FCB1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionViewLayout.m; sourceTree = "<group>"; };
 		233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBnbCollectionView.h; sourceTree = "<group>"; };
 		233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionView.m; sourceTree = "<group>"; };
+		233C8FCA1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBnbCollectionViewParallaxCell.h; sourceTree = "<group>"; };
+		233C8FCB1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBnbCollectionViewParallaxCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 				233C8FBF1B75016C00257C94 /* NVBnbCollectionViewLayout.m */,
 				233C8FC41B75CFF800257C94 /* NVBnbCollectionView.h */,
 				233C8FC51B75CFF800257C94 /* NVBnbCollectionView.m */,
+				233C8FCA1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.h */,
+				233C8FCB1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m */,
 			);
 			path = NVBnbCollectionView;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				233C8FA01B74C1F800257C94 /* ViewController.m in Sources */,
 				233C8F9D1B74C1F800257C94 /* AppDelegate.m in Sources */,
 				233C8F9A1B74C1F800257C94 /* main.m in Sources */,
+				233C8FCC1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m in Sources */,
 				233C8FC01B75016C00257C94 /* NVBnbCollectionViewLayout.m in Sources */,
 				233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */,
 			);
