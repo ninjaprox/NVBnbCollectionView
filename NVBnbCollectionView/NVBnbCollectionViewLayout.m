@@ -83,7 +83,7 @@
     
     // Calculate cell width
     self.gridCellWidth = (self.collectionView.frame.size.width - self.gridCellHorizontalSpacing - self.gridPadding * 2) / 2;
-    self.parallaxCellWidth = self.gridCellWidth * 2 + self.gridCellHorizontalSpacing;
+    self.parallaxCellWidth = self.collectionView.frame.size.width;
     
     // Calculate cell attributes
     _cellAttributes = [[NSMutableDictionary alloc] initWithCapacity:numberOfItems];
@@ -118,7 +118,7 @@
                 
                 break;
             case 3:
-                frame = CGRectMake(x, y, self.parallaxCellWidth, self.parallaxCellHeight);
+                frame = CGRectMake(0, y, self.parallaxCellWidth, self.parallaxCellHeight);
                 y += frame.size.height + self.gridPadding;
                 
                 break;
@@ -146,7 +146,7 @@
                 
                 break;
             case 9:
-                frame = CGRectMake(x, y, self.parallaxCellWidth, self.parallaxCellHeight);
+                frame = CGRectMake(0, y, self.parallaxCellWidth, self.parallaxCellHeight);
                 y += frame.size.height + self.gridPadding;
                 
                 break;
