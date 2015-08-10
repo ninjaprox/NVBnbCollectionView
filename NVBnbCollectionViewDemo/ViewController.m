@@ -24,17 +24,17 @@
 
 - (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    UILabel *label;
+    UIImageView *imageView;
     
     if (cell.contentView.subviews.count == 0) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-        [cell.contentView addSubview:label];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.bounds.size.width, cell.bounds.size.height)];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [cell.contentView addSubview:imageView];
     } else {
-        label = cell.contentView.subviews[0];
+        imageView = cell.contentView.subviews[0];
     }
     
-    cell.backgroundColor = [UIColor yellowColor];
-    label.text = [[NSString alloc] initWithFormat:@"%ld", (long)indexPath.row];
+    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"image-%ld", indexPath.row % 10 ]];
     
     return cell;
 }
@@ -44,7 +44,7 @@
     UILabel *label;
     
     cell.backgroundColor = [UIColor whiteColor];
-    cell.parallaxImage = [UIImage imageNamed:[NSString stringWithFormat:@"image_%d", 1]];
+    cell.parallaxImage = [UIImage imageNamed:[NSString stringWithFormat:@"image-%ld", indexPath.row % 10]];
     label.text = [[NSString alloc] initWithFormat:@"%ld", (long)indexPath.row];
     
     return cell;
