@@ -10,7 +10,9 @@
 
 @implementation NVBnbCollectionViewParallaxCell {
     UIImageView *_parallaxImageView;
+    NSLayoutConstraint *_parallaxImageViewWidthConstraint;
     NSLayoutConstraint *_parallaxImageViewHeightConstraint;
+    NSLayoutConstraint *_parallaxImageViewCenterXConstraint;
     NSLayoutConstraint *_parallaxImageViewCenterYConstraint;
 }
 
@@ -37,6 +39,7 @@
 }
 
 - (void)setUp {
+    _currentOrienration = UIInterfaceOrientationMaskPortrait;
     _parallaxImageView = [[UIImageView alloc] init];
     _parallaxImageView.contentMode = UIViewContentModeScaleAspectFill;
     _parallaxImageView.clipsToBounds = true;
@@ -45,11 +48,13 @@
     
     // Add constraints
     _parallaxImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    _parallaxImageViewWidthConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     _parallaxImageViewHeightConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
+    _parallaxImageViewCenterXConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     _parallaxImageViewCenterYConstraint = [NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1 constant:0]];
-    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_parallaxImageView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1 constant:0]];
+    [self.contentView addConstraint:_parallaxImageViewWidthConstraint];
     [self.contentView addConstraint:_parallaxImageViewHeightConstraint];
+    [self.contentView addConstraint:_parallaxImageViewCenterXConstraint];
     [self.contentView addConstraint:_parallaxImageViewCenterYConstraint];
 }
 
@@ -59,12 +64,24 @@
 }
 
 - (void)setParallaxImageOffset:(CGPoint)parallaxImageOffset {
+    _parallaxImageViewCenterXConstraint.constant = parallaxImageOffset.x;
     _parallaxImageViewCenterYConstraint.constant = parallaxImageOffset.y;
 }
 
 - (void)setMaxParallaxOffset:(CGFloat)maxParallaxOffset {
     _maxParallaxOffset = maxParallaxOffset;
-    _parallaxImageViewHeightConstraint.constant = 2 * maxParallaxOffset;
+    if (_currentOrienration == UIInterfaceOrientationMaskPortrait) {
+        _parallaxImageViewWidthConstraint.constant = 0;
+        _parallaxImageViewHeightConstraint.constant = 2 * maxParallaxOffset;
+    } else {
+        _parallaxImageViewWidthConstraint.constant = 2 * maxParallaxOffset;
+        _parallaxImageViewHeightConstraint.constant = 0;
+    }
+}
+
+- (void)setCurrentOrienration:(UIInterfaceOrientationMask)currentOrienration {
+    _currentOrienration = currentOrienration;
+    self.maxParallaxOffset = _maxParallaxOffset;
 }
 
 @end

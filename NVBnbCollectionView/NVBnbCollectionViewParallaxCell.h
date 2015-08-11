@@ -13,5 +13,6 @@
 @property (strong, nonatomic) UIImage *parallaxImage;
 @property (nonatomic) CGPoint parallaxImageOffset;
 @property (nonatomic) CGFloat maxParallaxOffset;
+@property (nonatomic) UIInterfaceOrientationMask currentOrienration;
 
 @end

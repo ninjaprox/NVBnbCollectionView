@@ -67,6 +67,7 @@
         NVBnbCollectionViewLayout *layout = (NVBnbCollectionViewLayout *) collectionView.collectionViewLayout;
         
         cell.maxParallaxOffset = layout.maxParallaxOffset;
+        cell.currentOrienration = layout.currentOrientation;
         
         return cell;
     }
@@ -84,7 +85,7 @@
 }
 
 - (void)doParallax:(CADisplayLink *)displayLink {
-    NSLog(@"doParallax");
+//    NSLog(@"doParallax");
     
     NSArray *visibleCells = self.visibleCells;
     
@@ -99,7 +100,13 @@
             CGSize cellSize = parallaxCell.bounds.size;
             CGFloat maxVerticalOffset = (bounds.size.height / 2) + (cellSize.height / 2);
             CGFloat scaleFactor = parallaxCell.maxParallaxOffset / maxVerticalOffset;
-            CGPoint parallaxOffset = CGPointMake(0.0, -offsetFromCenter.y * scaleFactor);
+            CGPoint parallaxOffset;
+            
+            if (parallaxCell.currentOrienration == UIInterfaceOrientationMaskPortrait) {
+                parallaxOffset = CGPointMake(0, -offsetFromCenter.y * scaleFactor);
+            } else {
+                parallaxOffset = CGPointMake(-offsetFromCenter.x * scaleFactor, 0);
+            }
             
             parallaxCell.parallaxImageOffset = parallaxOffset;
         }

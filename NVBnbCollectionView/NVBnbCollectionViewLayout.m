@@ -48,7 +48,6 @@
     CGSize _contentSize;
     NSMutableDictionary *_cellAttributes;
     CGSize _groupSize;
-    UIInterfaceOrientationMask _currentOrientation;
 }
 
 - (instancetype)init {

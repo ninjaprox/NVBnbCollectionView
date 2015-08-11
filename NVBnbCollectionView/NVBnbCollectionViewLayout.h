@@ -15,5 +15,6 @@
 @property (nonatomic) CGSize gridCellSpacing;
 @property (nonatomic) CGFloat gridPadding;
 @property (nonatomic) CGFloat maxParallaxOffset;
+@property (nonatomic, readonly) UIInterfaceOrientationMask currentOrientation;
 
 @end
