@@ -13,11 +13,12 @@
 
 @implementation NVBnbCollectionView {
     __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
+    CADisplayLink *_displayLink;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        self.delegate = self;
+        [self setUpParallax];
     }
     
     return self;
@@ -25,10 +26,14 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.delegate = self;
+        [self setUpParallax];
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [_displayLink invalidate];
 }
 
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
@@ -69,9 +74,18 @@
     return [_bnbDataSource bnbCollectionView:self cellForItemAtIndexPath:indexPath];
 }
 
-#pragma mark - UIScrollViewDelegate
+#pragma mark - Parallax
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)setUpParallax {
+    __weak id weakSelf = self;
+    
+    _displayLink = [CADisplayLink displayLinkWithTarget:weakSelf selector:@selector(doParallax:)];
+    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+}
+
+- (void)doParallax:(CADisplayLink *)displayLink {
+    NSLog(@"doParallax");
+    
     NSArray *visibleCells = self.visibleCells;
     
     for (UICollectionViewCell *cell in visibleCells) {
