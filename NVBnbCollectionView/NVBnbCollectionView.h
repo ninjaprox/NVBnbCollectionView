@@ -17,6 +17,9 @@
 - (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 - (NVBnbCollectionViewParallaxCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+- (UICollectionReusableView *)viewForHeaderInBnbCollectionView:(NVBnbCollectionView *)collectionView;
+
 @end
 
 @interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource>

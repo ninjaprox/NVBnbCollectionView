@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#define NVBnbCollectionElementKindHeader @"Header"
+
 @interface NVBnbCollectionViewLayout : UICollectionViewLayout
 
 @property (nonatomic) CGSize gridCellSize;
 @property (nonatomic) CGSize parallaxCellSize;
+@property (nonatomic) CGSize headerSize;
 @property (nonatomic) CGSize gridCellSpacing;
 @property (nonatomic) CGFloat gridPadding;
 @property (nonatomic) CGFloat maxParallaxOffset;

@@ -15,6 +15,8 @@
 #define GRID_PADDING 20
 #define PARALLAX_CELL_WIDTH 400
 #define PARALLAX_CELL_HEIGHT 200
+#define HEADER_WIDTH 200
+#define HEADER_HEIGHT 200
 #define NUMBER_OF_ITEMS_IN_GROUP 10
 #define SECTION 0
 #define MAX_PARALLAX_OFFSET 50
@@ -48,6 +50,7 @@
     CGSize _contentSize;
     NSMutableDictionary *_cellAttributes;
     CGSize _groupSize;
+    UICollectionViewLayoutAttributes *_headerAttributes;
 }
 
 - (instancetype)init {
@@ -79,6 +82,9 @@
     
     // Calculate cell attributes
     [self calculateCellAttributes];
+    
+    // Calculate header attributes
+    [self calculateHeaderAttributes];
 }
 
 - (CGSize)collectionViewContentSize {
@@ -102,13 +108,24 @@
         }
     }
     
+    // Add header attributes to array if it is in rect
+    if (CGRectIntersectsRect(rect, _headerAttributes.frame)) {
+        [result addObject:_headerAttributes];
+    }
+    
     return result;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [_cellAttributes objectForKey:indexPath];
     
+    NSLog(@"layoutAttributesForItemAtIndexPath");
+    
     return attributes;
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    return _headerAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -157,6 +174,7 @@
         if (numberOfItemsInLastGroup > 8) {
             _contentSize.height += self.parallaxCellSize.height;
         }
+        _contentSize.height += self.headerSize.height;
     } else {
         if (numberOfItemsInLastGroup > 1) {
             _contentSize.width += self.gridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
@@ -176,6 +194,7 @@
         if (numberOfItemsInLastGroup > 8) {
             _contentSize.width += self.parallaxCellSize.width;
         }
+        _contentSize.width += self.headerSize.width;
     }
 }
 
@@ -202,6 +221,13 @@
     
     CGFloat x = self.gridPadding;
     CGFloat y = self.gridPadding;
+    
+    // Give space for header
+    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+        y += self.headerSize.height;
+    } else {
+        x += self.headerSize.width;
+    }
     
     for (NSInteger itemCount = 0; itemCount < numberOfItems; itemCount++) {
         NSInteger indexInGroup = itemCount % NUMBER_OF_ITEMS_IN_GROUP;
@@ -317,6 +343,15 @@
     }
 }
 
+- (void)calculateHeaderAttributes {
+    _headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+        _headerAttributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, self.headerSize.height);
+    } else {
+        _headerAttributes.frame = CGRectMake(0, 0, self.headerSize.width, self.collectionView.frame.size.height);
+    }
+}
+
 #pragma mark - Private methods
 
 - (void)setDefaultValues {
@@ -326,6 +361,8 @@
     _parallaxCellSize.height = PARALLAX_CELL_HEIGHT;
     _gridCellSpacing.width = GRID_CELL_HORIZONTAL_SPACING;
     _gridCellSpacing.height = GRID_CELL_VERTICAL_SPACING;
+    _headerSize.width = HEADER_WIDTH;
+    _headerSize.height = HEADER_HEIGHT;
     self.gridPadding = GRID_PADDING;
     self.maxParallaxOffset = MAX_PARALLAX_OFFSET;
 }
