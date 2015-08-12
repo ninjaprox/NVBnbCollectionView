@@ -18,6 +18,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
+        [self setUp];
         [self setUpParallax];
     }
     
@@ -26,14 +27,20 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        [self setUp];
         [self setUpParallax];
     }
     
     return self;
 }
 
+- (void)setUp {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
 - (void)dealloc {
     [_displayLink invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
@@ -111,6 +118,14 @@
             parallaxCell.parallaxImageOffset = parallaxOffset;
         }
     }
+}
+
+#pragma mark - Orientation
+
+- (void)orientationChanged:(NSNotification *)notification {
+    // Trick to cause layout update immediately
+    self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
+    NSLog(@"orientationChanged");
 }
 
 @end
