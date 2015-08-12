@@ -36,6 +36,7 @@
 
 - (void)setUp {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:@"headerCell"];
 }
 
 - (void)dealloc {
@@ -80,6 +81,23 @@
     }
     
     return [_bnbDataSource bnbCollectionView:self cellForItemAtIndexPath:indexPath];
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *header = [self dequeueReusableSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:@"headerCell" forIndexPath:indexPath];
+    
+    header.backgroundColor = [UIColor grayColor];
+    if (header.subviews.count == 0) {
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
+        
+        textView.font = [UIFont systemFontOfSize:50];
+        textView.backgroundColor = [UIColor grayColor];
+        textView.textColor = [UIColor whiteColor];
+        textView.text = @"Header";
+        [header addSubview:textView];
+    }
+    
+    return header;
 }
 
 #pragma mark - Parallax
