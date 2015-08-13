@@ -53,6 +53,9 @@
                             <constraint firstItem="afI-RB-9g6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="thb-Ib-pEp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="_collectionView" destination="afI-RB-9g6" id="L99-pR-zgJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

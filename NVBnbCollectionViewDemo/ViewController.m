@@ -10,10 +10,14 @@
 
 #import "NVBnbCollectionViewParallaxCell.h"
 
-@implementation ViewController
+@implementation ViewController {
+    IBOutlet NVBnbCollectionView *_collectionView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:@"headerCell"];
 }
 
 #pragma mark - NVBnbCollectionViewDataSource
@@ -54,6 +58,23 @@
     label.text = [[NSString alloc] initWithFormat:@"%ld", (long)indexPath.row];
     
     return cell;
+}
+
+- (UICollectionReusableView *)bnbCollectionView:(NVBnbCollectionView *)collectionView headerAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *header = [_collectionView dequeueReusableSupplementaryViewOfKind: NVBnbCollectionElementKindHeader withReuseIdentifier:@"headerCell" forIndexPath:indexPath];
+    
+    header.backgroundColor = [UIColor grayColor];
+    if (header.subviews.count == 0) {
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 300, 100)];
+        
+        textView.font = [UIFont systemFontOfSize:50];
+        textView.backgroundColor = [UIColor grayColor];
+        textView.textColor = [UIColor whiteColor];
+        textView.text = @"Header";
+        [header addSubview:textView];
+    }
+    
+    return header;
 }
 
 @end
