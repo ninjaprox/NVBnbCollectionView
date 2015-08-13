@@ -77,4 +77,13 @@
     return header;
 }
 
+- (UIView *)bnbCollectionView:(NVBnbCollectionView *)collectionView moreLoaderAtIndexPath:(NSIndexPath *)indexPath {
+    UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    
+    view.color = [UIColor darkGrayColor];
+    [view startAnimating];
+    
+    return view;
+}
+
 @end
