@@ -46,6 +46,8 @@
 // Notes:
 // - Cell having the same number that is represent for item occuping multiple cells
 
+NSString *NVBnbCollectionElementKindHeader = @"Header";
+
 @implementation NVBnbCollectionViewLayout {
     CGSize _contentSize;
     NSMutableDictionary *_cellAttributes;

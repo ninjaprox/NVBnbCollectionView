@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define NVBnbCollectionElementKindHeader @"Header"
+UIKIT_EXTERN NSString *NVBnbCollectionElementKindHeader;
 
 @interface NVBnbCollectionViewLayout : UICollectionViewLayout
 
