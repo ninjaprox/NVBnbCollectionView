@@ -10,6 +10,8 @@
 
 #import "NVBnbCollectionViewParallaxCell.h"
 
+static NSString *kMoreLoaderIdentifier = @"moreLoader";
+
 @implementation NVBnbCollectionView {
     __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
     CADisplayLink *_displayLink;
@@ -35,6 +37,7 @@
 
 - (void)setUp {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withReuseIdentifier:kMoreLoaderIdentifier];
 }
 
 - (void)dealloc {
@@ -86,6 +89,24 @@
         UICollectionReusableView *header = [_bnbDataSource bnbCollectionView:self headerAtIndexPath:indexPath];
         
         return header;
+    } else if ([kind isEqualToString:NVBnbCollectionElementKindMoreLoader]){
+        UICollectionReusableView *moreLoader = [self dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kMoreLoaderIdentifier forIndexPath:indexPath];
+        UIView *moreLoaderView = [moreLoader viewWithTag:1];;
+        
+        if (!moreLoaderView) {
+            if ([_bnbDataSource respondsToSelector:@selector(bnbCollectionView:moreLoaderAtIndexPath:)]) {
+                moreLoaderView = [_bnbDataSource bnbCollectionView:self moreLoaderAtIndexPath:indexPath];
+            }
+            if (!moreLoaderView) {
+                moreLoaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+                [((UIActivityIndicatorView *) moreLoaderView) startAnimating];
+            }
+            moreLoaderView.center = CGPointMake(moreLoader.bounds.size.width / 2, moreLoader.bounds.size.height / 2);
+            moreLoaderView.tag = 1;
+            [moreLoader addSubview:moreLoaderView];
+        }
+        
+        return moreLoader;
     }
     
     return nil;

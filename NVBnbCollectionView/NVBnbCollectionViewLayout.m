@@ -17,6 +17,8 @@
 #define PARALLAX_CELL_HEIGHT 200
 #define HEADER_WIDTH 200
 #define HEADER_HEIGHT 200
+#define MORE_LOADER_WIDTH 50
+#define MORE_LOADER_HEIGHT 50
 #define NUMBER_OF_ITEMS_IN_GROUP 10
 #define SECTION 0
 #define MAX_PARALLAX_OFFSET 50
@@ -47,12 +49,14 @@
 // - Cell having the same number that is represent for item occuping multiple cells
 
 NSString *NVBnbCollectionElementKindHeader = @"Header";
+NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 @implementation NVBnbCollectionViewLayout {
     CGSize _contentSize;
     NSMutableDictionary *_cellAttributes;
     CGSize _groupSize;
     UICollectionViewLayoutAttributes *_headerAttributes;
+    UICollectionViewLayoutAttributes *_moreLoaderAttributes;
 }
 
 - (instancetype)init {
@@ -87,6 +91,9 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
     
     // Calculate header attributes
     [self calculateHeaderAttributes];
+    
+    // Calculate more loader attributes
+    [self calculateMoreLoaderAttributes];
 }
 
 - (CGSize)collectionViewContentSize {
@@ -113,6 +120,11 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
     // Add header attributes to array if it is in rect
     if (CGRectIntersectsRect(rect, _headerAttributes.frame)) {
         [result addObject:_headerAttributes];
+    }
+    
+    // Add more loader attributes to array if it is in rect
+    if (CGRectIntersectsRect(rect, _moreLoaderAttributes.frame)) {
+        [result addObject:_moreLoaderAttributes];
     }
     
     return result;
@@ -177,6 +189,7 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
             _contentSize.height += self.parallaxCellSize.height;
         }
         _contentSize.height += self.headerSize.height;
+        _contentSize.height += self.moreLoaderSize.height;
     } else {
         if (numberOfItemsInLastGroup > 1) {
             _contentSize.width += self.gridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
@@ -197,6 +210,7 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
             _contentSize.width += self.parallaxCellSize.width;
         }
         _contentSize.width += self.headerSize.width;
+        _contentSize.width += self.moreLoaderSize.width;
     }
 }
 
@@ -354,6 +368,17 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
     }
 }
 
+- (void)calculateMoreLoaderAttributes {
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:SECTION];
+    
+    _moreLoaderAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withIndexPath:[NSIndexPath  indexPathForRow:numberOfItems - 1 inSection:SECTION]];
+    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+        _moreLoaderAttributes.frame = CGRectMake(0, _contentSize.height - self.moreLoaderSize.height, self.collectionView.frame.size.width, self.moreLoaderSize.height);
+    } else {
+        _moreLoaderAttributes.frame = CGRectMake(_contentSize.width - self.moreLoaderSize.width, 0, self.moreLoaderSize.width, self.collectionView.frame.size.height);
+    }
+}
+
 #pragma mark - Private methods
 
 - (void)setDefaultValues {
@@ -365,6 +390,8 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
     _gridCellSpacing.height = GRID_CELL_VERTICAL_SPACING;
     _headerSize.width = HEADER_WIDTH;
     _headerSize.height = HEADER_HEIGHT;
+    _moreLoaderSize.width = MORE_LOADER_WIDTH;
+    _moreLoaderSize.height = MORE_LOADER_HEIGHT;
     self.gridPadding = GRID_PADDING;
     self.maxParallaxOffset = MAX_PARALLAX_OFFSET;
 }
