@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "NVBnbCollectionViewLayout.h"
+
 @class NVBnbCollectionView;
 @class NVBnbCollectionViewParallaxCell;
 
@@ -18,7 +20,7 @@
 - (NVBnbCollectionViewParallaxCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
-- (UICollectionReusableView *)viewForHeaderInBnbCollectionView:(NVBnbCollectionView *)collectionView;
+- (UICollectionReusableView *)bnbCollectionView:(NVBnbCollectionView *)collectionView headerAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

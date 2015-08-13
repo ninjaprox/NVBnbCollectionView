@@ -346,7 +346,7 @@ NSString *NVBnbCollectionElementKindHeader = @"Header";
 }
 
 - (void)calculateHeaderAttributes {
-    _headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    _headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withIndexPath:[NSIndexPath indexPathForRow:0 inSection:SECTION]];
     if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
         _headerAttributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, self.headerSize.height);
     } else {
