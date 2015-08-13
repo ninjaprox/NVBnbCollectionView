@@ -106,6 +106,11 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
             [moreLoader addSubview:moreLoaderView];
         }
         
+        // Load more
+        if (!self.loadingMore) {
+            [self loadMore];
+        }
+        
         return moreLoader;
     }
     
@@ -156,6 +161,16 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
     // Trick to cause layout update immediately
     self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
     NSLog(@"orientationChanged");
+}
+
+#pragma mark - Load more
+
+- (void)loadMore {
+    if ([self.delegate conformsToProtocol:@protocol(NVBnbCollectionViewDelegate)]
+        && [self.delegate respondsToSelector:@selector(loadMoreInBnbCollectionView:)]) {
+        self.loadingMore = true;
+        [(id<NVBnbCollectionViewDelegate>) self.delegate loadMoreInBnbCollectionView:self];
+    }
 }
 
 @end

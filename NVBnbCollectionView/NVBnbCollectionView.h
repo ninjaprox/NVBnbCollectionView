@@ -25,6 +25,15 @@
 
 @end
 
+@protocol NVBnbCollectionViewDelegate <UICollectionViewDelegate>
+
+@optional
+- (void)loadMoreInBnbCollectionView:(NVBnbCollectionView *)collectionView;
+
+@end
+
 @interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource>
+
+@property (nonatomic) BOOL loadingMore;
 
 @end
