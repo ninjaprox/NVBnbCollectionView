@@ -175,8 +175,8 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 
 - (void)orientationChanged:(NSNotification *)notification {
     _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    // Trick to cause layout update immediately
-//    self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
+    ((NVBnbCollectionViewLayout *) self.collectionViewLayout).currentOrientation = _currentOrientation;
+    [self.collectionViewLayout invalidateLayout];
     NSLog(@"orientationChanged");
 }
 

@@ -59,22 +59,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     UICollectionViewLayoutAttributes *_moreLoaderAttributes;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        [self determineOrientation];
-    }
-    
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) {
-        [self determineOrientation];
-    }
-    
-    return self;
-}
-
 - (void)prepareLayout {
     //    NSLog(@"prepareLayout");
     
@@ -145,8 +129,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     NSLog(@"newBounds: %@", NSStringFromCGRect(newBounds));
     
-    [self determineOrientation];
-    
     return true;
 }
 
@@ -155,7 +137,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 - (void)calculateContentSize {
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:SECTION];
     
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         _groupSize.width = self.collectionView.bounds.size.width;
         _groupSize.height = self.gridCellSize.height * 6 + self.gridCellSpacing.height * 4 + self.parallaxCellSize.height * 2 + self.gridPadding * 4;
         _contentSize.width = self.collectionView.bounds.size.width;
@@ -169,7 +151,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     
     NSInteger numberOfItemsInLastGroup = numberOfItems % 10;
     
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         if (numberOfItemsInLastGroup > 1) {
             _contentSize.height += self.gridCellSize.height + self.gridCellSpacing.height + self.gridPadding;
         }
@@ -215,7 +197,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (void)calculateCellSize {
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         _gridCellSize.width = (self.collectionView.frame.size.width - self.gridCellSpacing.width - self.gridPadding * 2) / 2;
         _parallaxCellSize.width = self.collectionView.frame.size.width;
     } else {
@@ -239,7 +221,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     CGFloat y = self.gridPadding;
     
     // Give space for header
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         y += self.headerSize.height;
     } else {
         x += self.headerSize.width;
@@ -251,7 +233,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
         UICollectionViewLayoutAttributes *attributes = [_cellAttributes objectForKey:indexPath];
         CGRect frame = CGRectZero;
         
-        if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+        if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
             switch (indexInGroup) {
                 case 0:
                     frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
@@ -365,7 +347,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     }
     
     _headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withIndexPath:[NSIndexPath indexPathForRow:0 inSection:SECTION]];
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         _headerAttributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, self.headerSize.height);
     } else {
         _headerAttributes.frame = CGRectMake(0, 0, self.headerSize.width, self.collectionView.frame.size.height);
@@ -376,7 +358,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:SECTION];
     
     _moreLoaderAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withIndexPath:[NSIndexPath  indexPathForRow:numberOfItems - 1 inSection:SECTION]];
-    if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         _moreLoaderAttributes.frame = CGRectMake(0, _contentSize.height - self.moreLoaderSize.height, self.collectionView.frame.size.width, self.moreLoaderSize.height);
     } else {
         _moreLoaderAttributes.frame = CGRectMake(_contentSize.width - self.moreLoaderSize.width, 0, self.moreLoaderSize.width, self.collectionView.frame.size.height);
@@ -398,16 +380,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     _moreLoaderSize.height = MORE_LOADER_HEIGHT;
     self.gridPadding = GRID_PADDING;
     self.maxParallaxOffset = MAX_PARALLAX_OFFSET;
-}
-
-- (void)determineOrientation {
-    if (!self.collectionView) {
-        _currentOrientation = UIInterfaceOrientationMaskPortrait;
-    } else if (self.collectionView.bounds.size.width < self.collectionView.bounds.size.height) {
-        _currentOrientation = UIInterfaceOrientationMaskPortrait;
-    } else {
-        _currentOrientation = UIInterfaceOrientationMaskLandscape;
-    }
 }
 
 @end

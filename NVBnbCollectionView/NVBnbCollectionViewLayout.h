@@ -20,6 +20,6 @@ UIKIT_EXTERN NSString *NVBnbCollectionElementKindMoreLoader;
 @property (nonatomic) CGSize gridCellSpacing;
 @property (nonatomic) CGFloat gridPadding;
 @property (nonatomic) CGFloat maxParallaxOffset;
-@property (nonatomic, readonly) UIInterfaceOrientationMask currentOrientation;
+@property (nonatomic) UIInterfaceOrientation currentOrientation;
 
 @end

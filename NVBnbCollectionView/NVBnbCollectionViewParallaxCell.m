@@ -39,7 +39,7 @@
 }
 
 - (void)setUp {
-    _currentOrienration = UIInterfaceOrientationMaskPortrait;
+    _currentOrienration = UIInterfaceOrientationPortrait;
     _parallaxImageView = [[UIImageView alloc] init];
     _parallaxImageView.contentMode = UIViewContentModeScaleAspectFill;
     _parallaxImageView.clipsToBounds = true;
@@ -70,7 +70,7 @@
 
 - (void)setMaxParallaxOffset:(CGFloat)maxParallaxOffset {
     _maxParallaxOffset = maxParallaxOffset;
-    if (_currentOrienration == UIInterfaceOrientationMaskPortrait) {
+    if (UIInterfaceOrientationIsPortrait(self.currentOrienration)) {
         _parallaxImageViewWidthConstraint.constant = 0;
         _parallaxImageViewHeightConstraint.constant = 2 * maxParallaxOffset;
     } else {
@@ -79,7 +79,7 @@
     }
 }
 
-- (void)setCurrentOrienration:(UIInterfaceOrientationMask)currentOrienration {
+- (void)setCurrentOrienration:(UIInterfaceOrientation)currentOrienration {
     _currentOrienration = currentOrienration;
     self.maxParallaxOffset = _maxParallaxOffset;
 }
