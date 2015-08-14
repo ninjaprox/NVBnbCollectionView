@@ -132,6 +132,9 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
             moreLoaderView.center = CGPointMake(moreLoader.bounds.size.width / 2, moreLoader.bounds.size.height / 2);
             moreLoaderView.tag = 1;
             [moreLoader addSubview:moreLoaderView];
+            moreLoaderView.translatesAutoresizingMaskIntoConstraints = false;
+            [moreLoader addConstraint:[NSLayoutConstraint constraintWithItem:moreLoaderView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:moreLoader attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+            [moreLoader addConstraint:[NSLayoutConstraint constraintWithItem:moreLoaderView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:moreLoader attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
         }
         
         return moreLoader;
