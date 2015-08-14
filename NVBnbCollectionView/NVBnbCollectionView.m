@@ -44,10 +44,10 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 }
 
 - (void)didChangeValueForKey:(NSString *)key {
-    if ([key isEqualToString:@"contentOffset"]) {
+    if ([key isEqualToString:@"contentOffset"] && !CGPointEqualToPoint(self.contentOffset, CGPointZero)) {
         if ((UIInterfaceOrientationIsPortrait(_currentOrientation) && self.contentOffset.y > (self.contentSize.height - self.frame.size.height))
             || (UIInterfaceOrientationIsLandscape(_currentOrientation) && self.contentOffset.x > (self.contentSize.width - self.frame.size.width))) {
-            NSLog(@"contentOffset changed");
+            NSLog(@"contentOffset changed: %@", NSStringFromCGPoint(self.contentOffset));
             // Load more
             if (self.enableLoadMore && !self.loadingMore) {
                 [self loadMore];
@@ -176,7 +176,7 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 - (void)orientationChanged:(NSNotification *)notification {
     _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     // Trick to cause layout update immediately
-    self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
+//    self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
     NSLog(@"orientationChanged");
 }
 
