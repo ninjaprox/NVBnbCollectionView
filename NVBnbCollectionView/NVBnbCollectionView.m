@@ -15,6 +15,7 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 @implementation NVBnbCollectionView {
     __weak id<NVBnbCollectionViewDataSource> _bnbDataSource;
     CADisplayLink *_displayLink;
+    UIInterfaceOrientation _currentOrientation;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -36,13 +37,29 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 }
 
 - (void)setUp {
+    self.enableLoadMore = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withReuseIdentifier:kMoreLoaderIdentifier];
+    [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)didChangeValueForKey:(NSString *)key {
+    if ([key isEqualToString:@"contentOffset"]) {
+        if ((UIInterfaceOrientationIsPortrait(_currentOrientation) && self.contentOffset.y > (self.contentSize.height - self.frame.size.height))
+            || (UIInterfaceOrientationIsLandscape(_currentOrientation) && self.contentOffset.y > (self.contentSize.width - self.frame.size.width))) {
+            NSLog(@"contentOffset changed");
+            // Load more
+            if (self.enableLoadMore && !self.loadingMore) {
+                [self loadMore];
+            }
+        }
+    }
 }
 
 - (void)dealloc {
     [_displayLink invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
@@ -106,11 +123,6 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
             [moreLoader addSubview:moreLoaderView];
         }
         
-        // Load more
-        if (!self.loadingMore) {
-            [self loadMore];
-        }
-        
         return moreLoader;
     }
     
@@ -158,6 +170,7 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 #pragma mark - Orientation
 
 - (void)orientationChanged:(NSNotification *)notification {
+    _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     // Trick to cause layout update immediately
     self.contentOffset = CGPointMake(self.contentOffset.x + 1, self.contentOffset.y + 1);
     NSLog(@"orientationChanged");

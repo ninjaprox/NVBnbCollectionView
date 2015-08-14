@@ -35,5 +35,6 @@
 @interface NVBnbCollectionView : UICollectionView <UICollectionViewDataSource>
 
 @property (nonatomic) BOOL loadingMore;
+@property (nonatomic) BOOL enableLoadMore;
 
 @end
