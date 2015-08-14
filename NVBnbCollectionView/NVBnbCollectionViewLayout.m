@@ -118,7 +118,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     }
     
     // Add header attributes to array if it is in rect
-    if (CGRectIntersectsRect(rect, _headerAttributes.frame)) {
+    if (_headerAttributes && CGRectIntersectsRect(rect, _headerAttributes.frame)) {
         [result addObject:_headerAttributes];
     }
     
@@ -360,6 +360,10 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (void)calculateHeaderAttributes {
+    if (self.headerSize.width == 0 || self.headerSize.height == 0) {
+        return;
+    }
+    
     _headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withIndexPath:[NSIndexPath indexPathForRow:0 inSection:SECTION]];
     if (_currentOrientation == UIInterfaceOrientationMaskPortrait) {
         _headerAttributes.frame = CGRectMake(0, 0, self.collectionView.frame.size.width, self.headerSize.height);

@@ -103,7 +103,11 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:NVBnbCollectionElementKindHeader]) {
-        UICollectionReusableView *header = [_bnbDataSource bnbCollectionView:self headerAtIndexPath:indexPath];
+        UICollectionReusableView *header = nil;
+        
+        if ([_bnbDataSource respondsToSelector:@selector(bnbCollectionView:headerAtIndexPath:)]) {
+            header = [_bnbDataSource bnbCollectionView:self headerAtIndexPath:indexPath];
+        }
         
         return header;
     } else if ([kind isEqualToString:NVBnbCollectionElementKindMoreLoader]){
