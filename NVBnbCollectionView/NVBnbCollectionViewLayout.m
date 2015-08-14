@@ -13,7 +13,7 @@
 #define GRID_CELL_SIZE CGSizeMake(200, 100)
 #define GRID_CELL_SPACING CGSizeMake(10, 10)
 #define GRID_PADDING 20
-#define PARALLAX_CELL_SIZE CGSizeMake(100, 200)
+#define PARALLAX_CELL_SIZE CGSizeMake(400, 200)
 #define HEADER_SIZE CGSizeMake(200, 200)
 #define MORE_LOADER_SIZE CGSizeMake(50, 50)
 #define NUMBER_OF_ITEMS_IN_GROUP 10
@@ -50,11 +50,13 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 @implementation NVBnbCollectionViewLayout {
     CGSize _contentSize;
-    NSMutableDictionary *_cellAttributes;
     CGSize _groupSize;
+    CGSize _internalGridCellSize;
+    CGSize _internalParallaxCellSize;
+    CGSize _previousBoundsSize;
+    NSMutableDictionary *_cellAttributes;
     UICollectionViewLayoutAttributes *_headerAttributes;
     UICollectionViewLayoutAttributes *_moreLoaderAttributes;
-    CGSize _previousBoundsSize;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -75,6 +77,8 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 - (void)prepareLayout {
     NSLog(@"prepareLayout");
+    _internalGridCellSize = self.gridCellSize;
+    _internalParallaxCellSize = self.parallaxCellSize;
     
     // Calculate content height
     [self calculateContentSize];
@@ -157,11 +161,11 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         _groupSize.width = self.collectionView.bounds.size.width;
-        _groupSize.height = self.gridCellSize.height * 6 + self.gridCellSpacing.height * 4 + self.parallaxCellSize.height * 2 + self.gridPadding * 4;
+        _groupSize.height = _internalGridCellSize.height * 6 + self.gridCellSpacing.height * 4 + _internalParallaxCellSize.height * 2 + self.gridPadding * 4;
         _contentSize.width = self.collectionView.bounds.size.width;
         _contentSize.height = _groupSize.height * (numberOfItems / 10);
     } else {
-        _groupSize.width = self.gridCellSize.width * 6 + self.gridCellSpacing.width * 4 + self.parallaxCellSize.width * 2 + self.gridPadding * 4;
+        _groupSize.width = _internalGridCellSize.width * 6 + self.gridCellSpacing.width * 4 + _internalParallaxCellSize.width * 2 + self.gridPadding * 4;
         _groupSize.height = self.collectionView.bounds.size.height;
         _contentSize.width = _groupSize.width * (numberOfItems / 10);
         _contentSize.height = self.collectionView.bounds.size.height;
@@ -172,43 +176,43 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         if (numberOfItemsInLastGroup > 1) {
-            _contentSize.height += self.gridCellSize.height + self.gridCellSpacing.height + self.gridPadding;
+            _contentSize.height += _internalGridCellSize.height + self.gridCellSpacing.height + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 3) {
-            _contentSize.height += self.parallaxCellSize.height + self.gridPadding;
+            _contentSize.height += _internalParallaxCellSize.height + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 4) {
-            _contentSize.height += self.gridCellSize.height;
+            _contentSize.height += _internalGridCellSize.height;
         }
         if (numberOfItemsInLastGroup > 6) {
-            _contentSize.height += self.gridCellSize.height * 2 + self.gridCellSpacing.height;
+            _contentSize.height += _internalGridCellSize.height * 2 + self.gridCellSpacing.height;
         }
         if (numberOfItemsInLastGroup > 7) {
-            _contentSize.height += self.gridCellSize.height + self.gridPadding;
+            _contentSize.height += _internalGridCellSize.height + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 8) {
-            _contentSize.height += self.parallaxCellSize.height;
+            _contentSize.height += _internalParallaxCellSize.height;
         }
         _contentSize.height += self.headerSize.height;
         _contentSize.height += (enableLoadMore) ? self.moreLoaderSize.height : 0;
     } else {
         if (numberOfItemsInLastGroup > 1) {
-            _contentSize.width += self.gridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
+            _contentSize.width += _internalGridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 3) {
-            _contentSize.width += self.parallaxCellSize.width + self.gridPadding;
+            _contentSize.width += _internalParallaxCellSize.width + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 4) {
-            _contentSize.width += self.gridCellSize.width;
+            _contentSize.width += _internalGridCellSize.width;
         }
         if (numberOfItemsInLastGroup > 6) {
-            _contentSize.width += self.gridCellSize.width * 2 + self.gridCellSpacing.width;
+            _contentSize.width += _internalGridCellSize.width * 2 + self.gridCellSpacing.width;
         }
         if (numberOfItemsInLastGroup > 7) {
-            _contentSize.width += self.gridCellSize.width + self.gridPadding;
+            _contentSize.width += _internalGridCellSize.width + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 8) {
-            _contentSize.width += self.parallaxCellSize.width;
+            _contentSize.width += _internalParallaxCellSize.width;
         }
         _contentSize.width += self.headerSize.width;
         _contentSize.width += (enableLoadMore) ? self.moreLoaderSize.width : 0;
@@ -217,11 +221,11 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 - (void)calculateCellSize {
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
-        _gridCellSize.width = (self.collectionView.frame.size.width - self.gridCellSpacing.width - self.gridPadding * 2) / 2;
-        _parallaxCellSize.width = self.collectionView.frame.size.width;
+        _internalGridCellSize.width = (self.collectionView.frame.size.width - self.gridCellSpacing.width - self.gridPadding * 2) / 2;
+        _internalParallaxCellSize.width = self.collectionView.frame.size.width;
     } else {
-        _gridCellSize.height = (self.collectionView.frame.size.height - self.gridCellSpacing.height - self.gridPadding * 2) / 2;
-        _parallaxCellSize.height = self.collectionView.frame.size.height;
+        _internalGridCellSize.height = (self.collectionView.frame.size.height - self.gridCellSpacing.height - self.gridPadding * 2) / 2;
+        _internalParallaxCellSize.height = self.collectionView.frame.size.height;
     }
 }
 
@@ -255,48 +259,48 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
         if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
             switch (indexInGroup) {
                 case 0:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 1:
-                    frame = CGRectMake(x + self.gridCellSize.width + self.gridCellSpacing.width, y, self.gridCellSize.width, self.gridCellSize.height * 2 + self.gridCellSpacing.height);
+                    frame = CGRectMake(x + _internalGridCellSize.width + self.gridCellSpacing.width, y, _internalGridCellSize.width, _internalGridCellSize.height * 2 + self.gridCellSpacing.height);
                     y += frame.size.height + self.gridPadding;
                     
                     break;
                 case 2:
-                    frame = CGRectMake(x, y - self.gridCellSize.height - self.gridPadding, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y - _internalGridCellSize.height - self.gridPadding, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 3:
-                    frame = CGRectMake(0, y, self.parallaxCellSize.width, self.parallaxCellSize.height);
+                    frame = CGRectMake(0, y, _internalParallaxCellSize.width, _internalParallaxCellSize.height);
                     y += frame.size.height + self.gridPadding;
                     
                     break;
                 case 4:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 5:
-                    frame = CGRectMake(x + self.gridCellSize.width + self.gridCellSpacing.width, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x + _internalGridCellSize.width + self.gridCellSpacing.width, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     y += frame.size.height + self.gridCellSpacing.height;
                     
                     break;
                 case 6:
-                    frame = CGRectMake(x, y, self.gridCellSize.width * 2 + self.gridCellSpacing.width, self.gridCellSize.height * 2 + self.gridCellSpacing.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width * 2 + self.gridCellSpacing.width, _internalGridCellSize.height * 2 + self.gridCellSpacing.height);
                     y += frame.size.height + self.gridCellSpacing.height;
                     
                     break;
                 case 7:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 8:
-                    frame = CGRectMake(x + self.gridCellSize.width + self.gridCellSpacing.width, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x + _internalGridCellSize.width + self.gridCellSpacing.width, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     y += frame.size.height + self.gridPadding;
                     
                     break;
                 case 9:
-                    frame = CGRectMake(0, y, self.parallaxCellSize.width, self.parallaxCellSize.height);
+                    frame = CGRectMake(0, y, _internalParallaxCellSize.width, _internalParallaxCellSize.height);
                     y += frame.size.height + self.gridPadding;
                     
                     break;
@@ -307,47 +311,47 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
         } else {
             switch (indexInGroup) {
                 case 0:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 1:
-                    frame = CGRectMake(x + self.gridCellSize.width + self.gridCellSpacing.width, y, self.gridCellSize.width, self.gridCellSize.height * 2 + self.gridCellSpacing.height);
+                    frame = CGRectMake(x + _internalGridCellSize.width + self.gridCellSpacing.width, y, _internalGridCellSize.width, _internalGridCellSize.height * 2 + self.gridCellSpacing.height);
                     
                     break;
                 case 2:
-                    frame = CGRectMake(x, y + self.gridCellSize.height + self.gridCellSpacing.height, self.gridCellSize.width, self.gridCellSize.height);
-                    x += self.gridCellSize.width * 2 + self.gridCellSpacing.width + self.gridPadding;
+                    frame = CGRectMake(x, y + _internalGridCellSize.height + self.gridCellSpacing.height, _internalGridCellSize.width, _internalGridCellSize.height);
+                    x += _internalGridCellSize.width * 2 + self.gridCellSpacing.width + self.gridPadding;
                     
                     break;
                 case 3:
-                    frame = CGRectMake(x, 0, self.parallaxCellSize.width, self.parallaxCellSize.height);
+                    frame = CGRectMake(x, 0, _internalParallaxCellSize.width, _internalParallaxCellSize.height);
                     x += frame.size.width + self.gridPadding;
                     
                     break;
                 case 4:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 5:
-                    frame = CGRectMake(x + self.gridCellSize.width + self.gridCellSpacing.width, y, self.gridCellSize.width * 2 + self.gridCellSpacing.width, self.gridCellSize.height * 2 + self.gridCellSpacing.height);
+                    frame = CGRectMake(x + _internalGridCellSize.width + self.gridCellSpacing.width, y, _internalGridCellSize.width * 2 + self.gridCellSpacing.width, _internalGridCellSize.height * 2 + self.gridCellSpacing.height);
                     
                     break;
                 case 6:
-                    frame = CGRectMake(x, y + self.gridCellSize.height + self.gridCellSpacing.height, self.gridCellSize.width, self.gridCellSize.height);
-                    x += self.gridCellSize.width * 3 + self.gridCellSpacing.width * 3;
+                    frame = CGRectMake(x, y + _internalGridCellSize.height + self.gridCellSpacing.height, _internalGridCellSize.width, _internalGridCellSize.height);
+                    x += _internalGridCellSize.width * 3 + self.gridCellSpacing.width * 3;
                     
                     break;
                 case 7:
-                    frame = CGRectMake(x, y, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y, _internalGridCellSize.width, _internalGridCellSize.height);
                     
                     break;
                 case 8:
-                    frame = CGRectMake(x, y + self.gridCellSize.height + self.gridCellSpacing.height, self.gridCellSize.width, self.gridCellSize.height);
+                    frame = CGRectMake(x, y + _internalGridCellSize.height + self.gridCellSpacing.height, _internalGridCellSize.width, _internalGridCellSize.height);
                     x += frame.size.width + self.gridPadding;
                     
                     break;
                 case 9:
-                    frame = CGRectMake(x, 0, self.parallaxCellSize.width, self.parallaxCellSize.height);
+                    frame = CGRectMake(x, 0, _internalParallaxCellSize.width, _internalParallaxCellSize.height);
                     x += frame.size.width + self.gridPadding;
                     
                     break;
