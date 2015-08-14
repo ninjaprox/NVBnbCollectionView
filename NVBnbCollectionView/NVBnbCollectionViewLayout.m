@@ -59,10 +59,31 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     CGSize _groupSize;
     UICollectionViewLayoutAttributes *_headerAttributes;
     UICollectionViewLayoutAttributes *_moreLoaderAttributes;
+    CGSize _previousBoundsSize;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setUp];
+    }
+    
+    return self;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [self setUp];
+    }
+    
+    return self;
+}
+
+- (void)setUp {
+    _previousBoundsSize = CGSizeZero;
 }
 
 - (void)prepareLayout {
-    //    NSLog(@"prepareLayout");
+    NSLog(@"prepareLayout");
     
     [self setDefaultValues];
     
@@ -131,7 +152,13 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     NSLog(@"newBounds: %@", NSStringFromCGRect(newBounds));
     
-    return true;
+    if (CGSizeEqualToSize(_previousBoundsSize, CGSizeZero) && !CGSizeEqualToSize(_previousBoundsSize, newBounds.size)) {
+        _previousBoundsSize = newBounds.size;
+        
+        return true;
+    }
+    
+    return false;
 }
 
 #pragma mark - Calculation methods
