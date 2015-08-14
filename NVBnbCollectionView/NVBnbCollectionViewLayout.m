@@ -10,17 +10,12 @@
 
 #import "NVBnbCollectionView.h"
 
-#define GRID_CELL_WIDTH 200
-#define GRID_CELL_HEIGHT 100
-#define GRID_CELL_VERTICAL_SPACING 10
-#define GRID_CELL_HORIZONTAL_SPACING 10
+#define GRID_CELL_SIZE CGSizeMake(200, 100)
+#define GRID_CELL_SPACING CGSizeMake(10, 10)
 #define GRID_PADDING 20
-#define PARALLAX_CELL_WIDTH 400
-#define PARALLAX_CELL_HEIGHT 200
-#define HEADER_WIDTH 200
-#define HEADER_HEIGHT 200
-#define MORE_LOADER_WIDTH 50
-#define MORE_LOADER_HEIGHT 50
+#define PARALLAX_CELL_SIZE CGSizeMake(100, 200)
+#define HEADER_SIZE CGSizeMake(200, 200)
+#define MORE_LOADER_SIZE CGSizeMake(50, 50)
 #define NUMBER_OF_ITEMS_IN_GROUP 10
 #define SECTION 0
 #define MAX_PARALLAX_OFFSET 50
@@ -64,7 +59,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        [self setUp];
+        [self setDefaultValues];
     }
     
     return self;
@@ -72,20 +67,14 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self setUp];
+        [self setDefaultValues];
     }
     
     return self;
 }
 
-- (void)setUp {
-    _previousBoundsSize = CGSizeZero;
-}
-
 - (void)prepareLayout {
     NSLog(@"prepareLayout");
-    
-    [self setDefaultValues];
     
     // Calculate content height
     [self calculateContentSize];
@@ -404,16 +393,12 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 #pragma mark - Private methods
 
 - (void)setDefaultValues {
-    _gridCellSize.width = GRID_CELL_WIDTH;
-    _gridCellSize.height = GRID_CELL_HEIGHT;
-    _parallaxCellSize.width = PARALLAX_CELL_WIDTH;
-    _parallaxCellSize.height = PARALLAX_CELL_HEIGHT;
-    _gridCellSpacing.width = GRID_CELL_HORIZONTAL_SPACING;
-    _gridCellSpacing.height = GRID_CELL_VERTICAL_SPACING;
-    _headerSize.width = HEADER_WIDTH;
-    _headerSize.height = HEADER_HEIGHT;
-    _moreLoaderSize.width = MORE_LOADER_WIDTH;
-    _moreLoaderSize.height = MORE_LOADER_HEIGHT;
+    _previousBoundsSize = CGSizeZero;
+    self.gridCellSize = GRID_CELL_SIZE;
+    self.parallaxCellSize = PARALLAX_CELL_SIZE;
+    self.gridCellSpacing = GRID_CELL_SPACING;
+    self.headerSize = HEADER_SIZE;
+    self.moreLoaderSize = MORE_LOADER_SIZE;
     self.gridPadding = GRID_PADDING;
     self.maxParallaxOffset = MAX_PARALLAX_OFFSET;
 }
