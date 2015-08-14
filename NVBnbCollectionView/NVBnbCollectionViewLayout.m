@@ -8,6 +8,8 @@
 
 #import "NVBnbCollectionViewLayout.h"
 
+#import "NVBnbCollectionView.h"
+
 #define GRID_CELL_WIDTH 200
 #define GRID_CELL_HEIGHT 100
 #define GRID_CELL_VERTICAL_SPACING 10
@@ -107,7 +109,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     }
     
     // Add more loader attributes to array if it is in rect
-    if (CGRectIntersectsRect(rect, _moreLoaderAttributes.frame)) {
+    if (_moreLoaderAttributes && CGRectIntersectsRect(rect, _moreLoaderAttributes.frame)) {
         [result addObject:_moreLoaderAttributes];
     }
     
@@ -150,6 +152,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     }
     
     NSInteger numberOfItemsInLastGroup = numberOfItems % 10;
+    BOOL enableLoadMore = ((NVBnbCollectionView *) self.collectionView).enableLoadMore;
     
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
         if (numberOfItemsInLastGroup > 1) {
@@ -171,7 +174,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
             _contentSize.height += self.parallaxCellSize.height;
         }
         _contentSize.height += self.headerSize.height;
-        _contentSize.height += self.moreLoaderSize.height;
+        _contentSize.height += (enableLoadMore) ? self.moreLoaderSize.height : 0;
     } else {
         if (numberOfItemsInLastGroup > 1) {
             _contentSize.width += self.gridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
@@ -192,7 +195,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
             _contentSize.width += self.parallaxCellSize.width;
         }
         _contentSize.width += self.headerSize.width;
-        _contentSize.width += self.moreLoaderSize.width;
+        _contentSize.width += (enableLoadMore) ? self.moreLoaderSize.width : 0;
     }
 }
 
@@ -355,6 +358,12 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (void)calculateMoreLoaderAttributes {
+    if (!((NVBnbCollectionView *) self.collectionView).enableLoadMore) {
+        _moreLoaderAttributes = nil;
+        
+        return;
+    }
+    
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:SECTION];
     
     _moreLoaderAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withIndexPath:[NSIndexPath  indexPathForRow:numberOfItems - 1 inSection:SECTION]];

@@ -62,10 +62,17 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
     [self removeObserver:self forKeyPath:@"contentOffset"];
 }
 
+#pragma mark - Accessors
+
 - (void)setDataSource:(id<UICollectionViewDataSource>)dataSource {
     [super setDataSource:self];
     
     _bnbDataSource = (id<NVBnbCollectionViewDataSource>) dataSource;
+}
+
+- (void)setEnableLoadMore:(BOOL)enableLoadMore {
+    _enableLoadMore = enableLoadMore;
+    [self.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - UICollectionViewDataSource
