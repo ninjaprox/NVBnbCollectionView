@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -21,23 +22,63 @@
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewLayout key="collectionViewLayout" id="H3H-Wv-ouU" customClass="NVBnbCollectionViewLayout"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xra-wz-W97">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xra-wz-W97" customClass="GridCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="156" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ci0-Fq-Gem">
+                                                    <rect key="frame" x="0.0" y="0.0" width="156" height="67"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Knm-kj-sHq">
+                                                    <rect key="frame" x="8" y="8" width="49" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Knm-kj-sHq" firstAttribute="top" secondItem="xra-wz-W97" secondAttribute="topMargin" id="89J-b1-JVX"/>
+                                            <constraint firstItem="Knm-kj-sHq" firstAttribute="leading" secondItem="xra-wz-W97" secondAttribute="leadingMargin" id="FNL-Jx-0PM"/>
+                                            <constraint firstItem="ci0-Fq-Gem" firstAttribute="top" secondItem="xra-wz-W97" secondAttribute="top" id="SdY-31-RcS"/>
+                                            <constraint firstItem="ci0-Fq-Gem" firstAttribute="leading" secondItem="xra-wz-W97" secondAttribute="leading" id="W1K-gv-J6e"/>
+                                            <constraint firstAttribute="trailing" secondItem="ci0-Fq-Gem" secondAttribute="trailing" id="u5j-ej-3vZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="ci0-Fq-Gem" secondAttribute="bottom" id="vhj-Ef-lLJ"/>
+                                        </constraints>
+                                        <size key="customSize" width="156" height="67"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="ci0-Fq-Gem" id="Obd-Qj-w79"/>
+                                            <outlet property="label" destination="Knm-kj-sHq" id="b5Q-Xh-QVi"/>
+                                        </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="parallaxCell" id="8nI-Ny-BbU" customClass="NVBnbCollectionViewParallaxCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="parallaxCell" id="8nI-Ny-BbU" customClass="ParallaxCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="224" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xL-ld-rBZ">
+                                                    <rect key="frame" x="8" y="8" width="72" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="1xL-ld-rBZ" firstAttribute="leading" secondItem="8nI-Ny-BbU" secondAttribute="leadingMargin" id="SOH-BL-vDZ"/>
+                                            <constraint firstItem="1xL-ld-rBZ" firstAttribute="top" secondItem="8nI-Ny-BbU" secondAttribute="topMargin" id="hen-At-8zZ"/>
+                                        </constraints>
+                                        <size key="customSize" width="224" height="89"/>
+                                        <connections>
+                                            <outlet property="label" destination="1xL-ld-rBZ" id="NZT-zG-Fq1"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
