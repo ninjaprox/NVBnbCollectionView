@@ -122,8 +122,8 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
         UIView *moreLoaderView = [moreLoader viewWithTag:1];;
         
         if (!moreLoaderView) {
-            if ([_bnbDataSource respondsToSelector:@selector(bnbCollectionView:moreLoaderAtIndexPath:)]) {
-                moreLoaderView = [_bnbDataSource bnbCollectionView:self moreLoaderAtIndexPath:indexPath];
+            if ([_bnbDataSource respondsToSelector:@selector(moreLoaderInBnbCollectionView:)]) {
+                moreLoaderView = [_bnbDataSource moreLoaderInBnbCollectionView:self];
             }
             if (!moreLoaderView) {
                 moreLoaderView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];

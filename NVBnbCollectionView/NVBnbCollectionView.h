@@ -62,11 +62,10 @@
  *  Return more loader view of collection view. This view will be added into the section at bottom of collection view.
  *
  *  @param collectionView The collection view using this data source.
- *  @param indexPath      Skip this.
  *
  *  @return More loader view of collection view.
  */
-- (UIView *)bnbCollectionView:(NVBnbCollectionView *)collectionView moreLoaderAtIndexPath:(NSIndexPath *)indexPath;
+- (UIView *)moreLoaderInBnbCollectionView:(NVBnbCollectionView *)collectionView;
 
 @end
 
