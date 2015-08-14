@@ -10,7 +10,7 @@
 
 #import "NVBnbCollectionView.h"
 
-@interface ViewController : UIViewController <NVBnbCollectionViewDataSource>
+@interface ViewController : UIViewController <NVBnbCollectionViewDataSource, NVBnbCollectionViewDelegate>
 
 @end
 

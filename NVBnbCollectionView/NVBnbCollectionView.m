@@ -46,7 +46,7 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 - (void)didChangeValueForKey:(NSString *)key {
     if ([key isEqualToString:@"contentOffset"]) {
         if ((UIInterfaceOrientationIsPortrait(_currentOrientation) && self.contentOffset.y > (self.contentSize.height - self.frame.size.height))
-            || (UIInterfaceOrientationIsLandscape(_currentOrientation) && self.contentOffset.y > (self.contentSize.width - self.frame.size.width))) {
+            || (UIInterfaceOrientationIsLandscape(_currentOrientation) && self.contentOffset.x > (self.contentSize.width - self.frame.size.width))) {
             NSLog(@"contentOffset changed");
             // Load more
             if (self.enableLoadMore && !self.loadingMore) {

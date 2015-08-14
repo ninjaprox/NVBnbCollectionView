@@ -12,18 +12,20 @@
 
 @implementation ViewController {
     IBOutlet NVBnbCollectionView *_collectionView;
+    NSInteger _numberOfItems;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _numberOfItems = 20;
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:@"headerCell"];
 }
 
 #pragma mark - NVBnbCollectionViewDataSource
 
 - (NSInteger)numberOfItemsInBnbCollectionView:(NVBnbCollectionView *)collectionView {
-    return 100;
+    return _numberOfItems;
 }
 
 - (UICollectionViewCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,6 +86,15 @@
     [view startAnimating];
     
     return view;
+}
+
+#pragma mark - NVBnbCollectionViewDelegate
+
+- (void)loadMoreInBnbCollectionView:(NVBnbCollectionView *)collectionView {
+    NSLog(@"loadMoreInBnbCollectionView:");
+    _numberOfItems += 20;
+    collectionView.loadingMore = false;
+    [collectionView reloadData];
 }
 
 @end
