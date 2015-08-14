@@ -167,7 +167,7 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
             CGFloat scaleFactor = parallaxCell.maxParallaxOffset / maxVerticalOffset;
             CGPoint parallaxOffset;
             
-            if (parallaxCell.currentOrienration == UIInterfaceOrientationMaskPortrait) {
+            if (UIInterfaceOrientationIsPortrait(_currentOrientation)) {
                 parallaxOffset = CGPointMake(0, -offsetFromCenter.y * scaleFactor);
             } else {
                 parallaxOffset = CGPointMake(-offsetFromCenter.x * scaleFactor, 0);
