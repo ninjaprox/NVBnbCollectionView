@@ -132,6 +132,10 @@ Would like nicer one? You can check [NVActivityIndicatorView](https://github.com
 
 ```
 
+# Documentation
+
+[CocoaDocs](http://cocoadocs.org/docsets/NVBnbCollectionView/1.0.0/)
+
 # References
 
 To create parallax effect, I read the following posts and borrowed a hunk of code. Read them if you want to know what happends behind the screen, not too complicated.
