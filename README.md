@@ -9,11 +9,11 @@ NVBnbCollectionView is an Airbnb-inspired collection view.
 
 ## Portrait
 
-![Portrait](https://raw.githubusercontent.com/ninjaprox/Butterfly/master/Demo-portrait.gif)
+![Portrait](https://raw.githubusercontent.com/ninjaprox/NVBnbCollectionView/master/Demo-portrait.gif)
 
 ## Landscape
 
-![Landscpae](https://raw.githubusercontent.com/ninjaprox/Butterfly/master/Demo-landscape.gif)
+![Landscpae](https://raw.githubusercontent.com/ninjaprox/NVBnbCollectionView/master/Demo-landscape.gif)
 
 For first-hand experience, just open the project and run it.
 
@@ -47,7 +47,7 @@ Copy NVBnbCollectionView folder to your project. That's it.
 
 To keep it simple in first version, I use fixed layout as in Airbnb app.
 
-![Layout](https://raw.githubusercontent.com/ninjaprox/Butterfly/master/Layout.jpg)
+![Layout](https://raw.githubusercontent.com/ninjaprox/NVBnbCollectionView/master/Layout.jpg)
 
 Cells with red border are parallax cell. Others are grid cell.
 
