@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23339C581B8176D500449CAA /* GridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23339C541B8176D500449CAA /* GridCell.m */; };
+		23339C591B8176D500449CAA /* Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23339C551B8176D500449CAA /* Header.xib */; };
+		23339C5A1B8176D500449CAA /* ParallaxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23339C571B8176D500449CAA /* ParallaxCell.m */; };
 		233C8F9A1B74C1F800257C94 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8F991B74C1F800257C94 /* main.m */; };
 		233C8F9D1B74C1F800257C94 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8F9C1B74C1F800257C94 /* AppDelegate.m */; };
 		233C8FA01B74C1F800257C94 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C8F9F1B74C1F800257C94 /* ViewController.m */; };
@@ -30,6 +33,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23339C531B8176D500449CAA /* GridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCell.h; sourceTree = "<group>"; };
+		23339C541B8176D500449CAA /* GridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCell.m; sourceTree = "<group>"; };
+		23339C551B8176D500449CAA /* Header.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Header.xib; sourceTree = "<group>"; };
+		23339C561B8176D500449CAA /* ParallaxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxCell.h; sourceTree = "<group>"; };
+		23339C571B8176D500449CAA /* ParallaxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxCell.m; sourceTree = "<group>"; };
 		233C8F941B74C1F800257C94 /* NVBnbCollectionViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NVBnbCollectionViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		233C8F981B74C1F800257C94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		233C8F991B74C1F800257C94 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +100,11 @@
 		233C8F961B74C1F800257C94 /* NVBnbCollectionViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				23339C531B8176D500449CAA /* GridCell.h */,
+				23339C541B8176D500449CAA /* GridCell.m */,
+				23339C551B8176D500449CAA /* Header.xib */,
+				23339C561B8176D500449CAA /* ParallaxCell.h */,
+				23339C571B8176D500449CAA /* ParallaxCell.m */,
 				233C8F9B1B74C1F800257C94 /* AppDelegate.h */,
 				233C8F9C1B74C1F800257C94 /* AppDelegate.m */,
 				233C8F9E1B74C1F800257C94 /* ViewController.h */,
@@ -222,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23339C591B8176D500449CAA /* Header.xib in Resources */,
 				233C8FA31B74C1F800257C94 /* Main.storyboard in Resources */,
 				233C8FA81B74C1F800257C94 /* LaunchScreen.xib in Resources */,
 				233C8FA51B74C1F800257C94 /* Images.xcassets in Resources */,
@@ -246,7 +260,9 @@
 				233C8F9D1B74C1F800257C94 /* AppDelegate.m in Sources */,
 				233C8F9A1B74C1F800257C94 /* main.m in Sources */,
 				233C8FCC1B760C9500257C94 /* NVBnbCollectionViewParallaxCell.m in Sources */,
+				23339C581B8176D500449CAA /* GridCell.m in Sources */,
 				233C8FC01B75016C00257C94 /* NVBnbCollectionViewLayout.m in Sources */,
+				23339C5A1B8176D500449CAA /* ParallaxCell.m in Sources */,
 				233C8FC61B75CFF800257C94 /* NVBnbCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
