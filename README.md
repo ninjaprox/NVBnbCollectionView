@@ -110,7 +110,7 @@ Collection view needs data source to provide information about cells, your class
 - (NVBnbCollectionViewParallaxCell *)bnbCollectionView:(NVBnbCollectionView *)collectionView parallaxCellForItemAtIndexPath:(NSIndexPath *)indexPath;
 ```
 
-In addition, if collection view has header and load more ability, it should know how the header, more loader look like:
+In addition, if collection view has header and load more ability, it should know how the header, more loader look like.
 
 ```objective-c
 - (UICollectionReusableView *)bnbCollectionView:(NVBnbCollectionView *)collectionView headerAtIndexPath:(NSIndexPath *)indexPath;
@@ -131,6 +131,31 @@ Would like nicer one? You can check [NVActivityIndicatorView](https://github.com
 - (void)loadMoreInBnbCollectionView:(NVBnbCollectionView *)collectionView;
 
 ```
+
+## Header
+
+To add header, set `headerSize` in layout greater than 0.
+
+Register header to collection view using kind `NVBnbCollectionElementKindHeader`
+
+```objective-c
+[collectionView registerNib:<nib> forSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:<identifier>];
+[collectionView registerClass:<nib> forSupplementaryViewOfKind:NVBnbCollectionElementKindHeader withReuseIdentifier:<identifier>];
+```
+
+Header must be subclass of `UICollectionReusableView`.
+
+If collection view has header, you have to implement `bnbCollectionView:headerAtIndexPath:` in data source. Otherwise, this will cause error.
+
+```objective-c
+- (UICollectionReusableView *)bnbCollectionView:(NVBnbCollectionView *)collectionView headerAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind: NVBnbCollectionElementKindHeader withReuseIdentifier:<identifier> forIndexPath:indexPath];
+    
+    return header;
+}
+```
+
+If collection view doesn't have header, you can omit `bnbCollectionView:headerAtIndexPath:` or just return `nil`.
 
 # Documentation
 
