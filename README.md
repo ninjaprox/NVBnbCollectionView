@@ -132,6 +132,20 @@ Would like nicer one? You can check [NVActivityIndicatorView](https://github.com
 
 ```
 
+## Parallax cell
+
+`NVBnbCollectionViewParallaxCell` is subclass of `UICollectionViewCell` with built-in parallax effect image view. Therefore, you class should be subclass of `NVBNbCollectionViewParallaxCell` to have this ability.
+
+To set image used parallax effect, use `parallaxImage` property. Example:
+
+```objective-c
+NVBnbCollectionViewParallaxCell *parallaxCell = [collectionView dequeueReusableCellWithReuseIdentifier:<identifier> forIndexPath:indexPath];
+
+cell.parallaxImage = [UIImage imageNamed:<image name>];
+```
+
+You can also set `maxParallaxOffset` in `NVBnbCollectionViewLayout` to adjust how much the parallax image will be shifted.
+
 ## Header
 
 To add header, set `headerSize` in layout greater than 0.
@@ -156,6 +170,8 @@ If collection view has header, you have to implement `bnbCollectionView:headerAt
 ```
 
 If collection view doesn't have header, you can omit `bnbCollectionView:headerAtIndexPath:` or just return `nil`.
+
+## More loader
 
 # Documentation
 
