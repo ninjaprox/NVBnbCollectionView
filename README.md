@@ -59,9 +59,7 @@ Orange regions are cell spacing `gridCellSpacing`.
 
 In portrait, height of grid cell and parallax cell are specified in `gridCellSize` and `parallaxCellSize` respectively in layout, width will be calculated base on `gridPadding` and collection view width.
 
-In landscape, width of grid cell and parallax cell are specified in `gridCellSize` and `parallaxCellSize` respectively in layout, height will be calculated base on `gridPadding` and collection view height.
-
-This is also applied for others (i.e. header, more loader and spacing between grid cells).
+The same is applied in landspace and for other (i.e. header, more loader and spacing between grid cells).
 
 # Usage
 
@@ -112,9 +110,13 @@ Collection view needs data source to provide information about cells, your class
 
 In addition, if collection view has header and load more ability, it should know how the header, more loader look like.
 
+* How header looks like:
+
 ```objective-c
 - (UICollectionReusableView *)bnbCollectionView:(NVBnbCollectionView *)collectionView headerAtIndexPath:(NSIndexPath *)indexPath;
 ```
+
+* How more loader looks like:
 
 ```objective-c
 - (UIView *)moreLoaderInBnbCollectionView:(NVBnbCollectionView *)collectionView;
@@ -192,7 +194,9 @@ You can opt-out this ability by setting `enableLoadMore` in `NVBnbCollectionView
 
 # Documentation
 
-[CocoaDocs](http://cocoadocs.org/docsets/NVBnbCollectionView/1.0.0/)
+This README literraly describes enough information you need to use `NVBnbCollectionView`. 
+
+For more details: [CocoaDocs](http://cocoadocs.org/docsets/NVBnbCollectionView/1.0.0/)
 
 # References
 
