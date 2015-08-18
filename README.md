@@ -120,9 +120,6 @@ In addition, if collection view has header and load more ability, it should know
 - (UIView *)moreLoaderInBnbCollectionView:(NVBnbCollectionView *)collectionView;
 ```
 
-If you do not provide more loader while `enableLoadMore` is `true`, `UIActivityIndicatorView` is used as default.
-Would like nicer one? You can check [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView).
-
 ## Delegate
 
 `NVBnbCollectionViewDelegate` is subclass of `UICollectionViewDelegate` so it inherits all abilities from its parent, plus one method to notify controller whenever the collection view needs more data.
@@ -172,6 +169,26 @@ If collection view has header, you have to implement `bnbCollectionView:headerAt
 If collection view doesn't have header, you can omit `bnbCollectionView:headerAtIndexPath:` or just return `nil`.
 
 ## More loader
+
+`NVBnbCollectionView` itself has load more ability. There is a more loader section below collection view to indicate the collection view waiting for more data. Size of this section is specified in  `moreLoaderSize` in `NVBnbCollectionViewLayout`.
+
+You can change the activity indicator view in more loader section by providing your custom one in `moreLoaderInBnbCollectionView:collectionView:`. By default, `UIActivityIndicatorView` will be used. However, if you would like something else nicer and ready to use, check [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView).
+
+Once collection view hits its bottom, it will delegate to `loadMoreInBnbCollectionView:collectionView`. In this way, controller has chance to load more data. While doing this, collection view will not delegate any more until `loadingMore` is set to `false`. For example:
+
+```objective-c
+- (void)loadMoreInBnbCollectionView:(NVBnbCollectionView *)collectionView {
+    [self loadMore];
+}
+
+- (void)loadMore {
+    // Your async call to fetch more data
+    // Once done, let collection view knows it should delegate again the next time hitting its bottom
+    collectionView.loadingMore = false;
+}
+```
+
+You can opt-out this ability by setting `enableLoadMore` in `NVBnbCollectionView`.
 
 # Documentation
 
