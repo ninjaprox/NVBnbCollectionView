@@ -97,6 +97,6 @@
 /**
  *  Indicate if the collection view has load more ability.
  */
-@property (nonatomic) BOOL enableLoadMore;
+@property (nonatomic) IBInspectable BOOL enableLoadMore;
 
 @end
