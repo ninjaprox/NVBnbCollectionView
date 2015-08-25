@@ -38,6 +38,8 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 
 - (void)setUp {
     self.enableLoadMore = true;
+    _currentOrientation = UIInterfaceOrientationPortrait;
+    ((NVBnbCollectionViewLayout *) self.collectionViewLayout).currentOrientation = _currentOrientation;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:NVBnbCollectionElementKindMoreLoader withReuseIdentifier:kMoreLoaderIdentifier];
     [self addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
