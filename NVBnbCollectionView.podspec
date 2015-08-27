@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '7.0'
 
-  s.source       = { :git => "https://github.com/ninjaprox/NVBnbCollectionView.git", :tag => "v1.0.0" }
+  s.source       = { :git => "https://github.com/ninjaprox/NVBnbCollectionView.git", :tag => "v1.0.1" }
   s.source_files  = "NVBnbCollectionView/*.{h,m}"
 
   s.frameworks = "UIKit"
