@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NVBnbCollectionView"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "An Airbnb-inspired collection view"
   s.homepage     = "https://github.com/ninjaprox/NVBnbCollectionView"
   s.screenshots  = ["https://raw.githubusercontent.com/ninjaprox/NVBnbCollectionView/master/Demo-portrait.gif",
