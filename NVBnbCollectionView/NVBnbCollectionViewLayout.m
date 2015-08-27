@@ -196,23 +196,23 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
         _contentSize.height += self.headerSize.height;
         _contentSize.height += (enableLoadMore) ? self.moreLoaderSize.height : 0;
     } else {
+        if (numberOfItemsInLastGroup > 0) {
+            _contentSize.width += _internalGridCellSize.width + self.gridPadding;
+        }
         if (numberOfItemsInLastGroup > 1) {
-            _contentSize.width += _internalGridCellSize.width + self.gridCellSpacing.width + self.gridPadding;
+            _contentSize.width += _internalGridCellSize.width + self.gridCellSpacing.width;
         }
         if (numberOfItemsInLastGroup > 3) {
             _contentSize.width += _internalParallaxCellSize.width + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 4) {
-            _contentSize.width += _internalGridCellSize.width;
-        }
-        if (numberOfItemsInLastGroup > 6) {
-            _contentSize.width += _internalGridCellSize.width * 2 + self.gridCellSpacing.width;
-        }
-        if (numberOfItemsInLastGroup > 7) {
             _contentSize.width += _internalGridCellSize.width + self.gridPadding;
         }
-        if (numberOfItemsInLastGroup > 8) {
-            _contentSize.width += _internalParallaxCellSize.width;
+        if (numberOfItemsInLastGroup > 5) {
+            _contentSize.width += _internalGridCellSize.width * 2 + self.gridCellSpacing.width * 2;
+        }
+        if (numberOfItemsInLastGroup > 7) {
+            _contentSize.width += _internalGridCellSize.width + self.gridCellSpacing.width;
         }
         _contentSize.width += self.headerSize.width;
         _contentSize.width += (enableLoadMore) ? self.moreLoaderSize.width : 0;
