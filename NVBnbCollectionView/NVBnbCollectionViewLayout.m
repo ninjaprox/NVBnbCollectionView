@@ -175,23 +175,23 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
     BOOL enableLoadMore = ((NVBnbCollectionView *) self.collectionView).enableLoadMore;
     
     if (UIInterfaceOrientationIsPortrait(self.currentOrientation)) {
+        if (numberOfItemsInLastGroup > 0) {
+            _contentSize.height += _internalGridCellSize.height + self.gridPadding;
+        }
         if (numberOfItemsInLastGroup > 1) {
-            _contentSize.height += _internalGridCellSize.height + self.gridCellSpacing.height + self.gridPadding;
+            _contentSize.height += _internalGridCellSize.height + self.gridCellSpacing.height;
         }
         if (numberOfItemsInLastGroup > 3) {
             _contentSize.height += _internalParallaxCellSize.height + self.gridPadding;
         }
         if (numberOfItemsInLastGroup > 4) {
-            _contentSize.height += _internalGridCellSize.height;
-        }
-        if (numberOfItemsInLastGroup > 6) {
-            _contentSize.height += _internalGridCellSize.height * 2 + self.gridCellSpacing.height;
-        }
-        if (numberOfItemsInLastGroup > 7) {
             _contentSize.height += _internalGridCellSize.height + self.gridPadding;
         }
-        if (numberOfItemsInLastGroup > 8) {
-            _contentSize.height += _internalParallaxCellSize.height;
+        if (numberOfItemsInLastGroup > 6) {
+            _contentSize.height += _internalGridCellSize.height * 2 + self.gridCellSpacing.height * 2;
+        }
+        if (numberOfItemsInLastGroup > 7) {
+            _contentSize.height += _internalGridCellSize.height + self.gridCellSpacing.height;
         }
         _contentSize.height += self.headerSize.height;
         _contentSize.height += (enableLoadMore) ? self.moreLoaderSize.height : 0;
