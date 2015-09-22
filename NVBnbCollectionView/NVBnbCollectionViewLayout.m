@@ -145,7 +145,7 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     NSLog(@"newBounds: %@", NSStringFromCGRect(newBounds));
     
-    if (CGSizeEqualToSize(_previousBoundsSize, CGSizeZero) && !CGSizeEqualToSize(_previousBoundsSize, newBounds.size)) {
+    if (!CGSizeEqualToSize(_previousBoundsSize, newBounds.size)) {
         _previousBoundsSize = newBounds.size;
         
         return true;
