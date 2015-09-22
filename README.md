@@ -1,4 +1,5 @@
-NVBnbCollectionView
+NVBnbCollectionView [![Build Status](https://travis-ci.org/ninjaprox/NVBnbCollectionView.svg?branch=master)](https://travis-ci.org/ninjaprox/NVBnbCollectionView)
+
 ===================
 
 # Introduction
