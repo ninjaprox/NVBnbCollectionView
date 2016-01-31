@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NVBnbCollectionView"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "An Airbnb-inspired collection view"
   s.homepage     = "https://github.com/ninjaprox/NVBnbCollectionView"
   s.screenshots  = ["https://raw.githubusercontent.com/ninjaprox/NVBnbCollectionView/master/Demo-portrait.gif",
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, '7.0'
 
-  s.source       = { :git => "https://github.com/ninjaprox/NVBnbCollectionView.git", :tag => "v1.0.1" }
+  s.source       = { :git => "https://github.com/ninjaprox/NVBnbCollectionView.git", :tag => "v1.0.2" }
   s.source_files  = "NVBnbCollectionView/*.{h,m}"
 
   s.frameworks = "UIKit"
