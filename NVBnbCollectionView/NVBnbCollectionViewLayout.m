@@ -76,7 +76,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (void)prepareLayout {
-    NSLog(@"prepareLayout");
     _internalGridCellSize = self.gridCellSize;
     _internalParallaxCellSize = self.parallaxCellSize;
     
@@ -97,14 +96,10 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (CGSize)collectionViewContentSize {
-    //    NSLog(@"collectionViewContentSize");
-    
     return _contentSize;
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    //    NSLog(@"layoutAttributesForElementsInRect");
-    
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:10];
     NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:0];
     
@@ -133,8 +128,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [_cellAttributes objectForKey:indexPath];
     
-    NSLog(@"layoutAttributesForItemAtIndexPath");
-    
     return attributes;
 }
 
@@ -143,8 +136,6 @@ NSString *NVBnbCollectionElementKindMoreLoader = @"MoreLoader";
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    NSLog(@"newBounds: %@", NSStringFromCGRect(newBounds));
-    
     if (!CGSizeEqualToSize(_previousBoundsSize, newBounds.size)) {
         _previousBoundsSize = newBounds.size;
         

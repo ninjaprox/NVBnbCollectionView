@@ -49,7 +49,6 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
     if ([key isEqualToString:@"contentOffset"] && !CGPointEqualToPoint(self.contentOffset, CGPointZero)) {
         if ((UIInterfaceOrientationIsPortrait(_currentOrientation) && self.contentOffset.y > (self.contentSize.height - self.frame.size.height))
             || (UIInterfaceOrientationIsLandscape(_currentOrientation) && self.contentOffset.x > (self.contentSize.width - self.frame.size.width))) {
-            NSLog(@"contentOffset changed: %@", NSStringFromCGPoint(self.contentOffset));
             // Load more
             if (self.enableLoadMore && !self.loadingMore) {
                 [self loadMore];
@@ -155,8 +154,6 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
 }
 
 - (void)doParallax:(CADisplayLink *)displayLink {
-//    NSLog(@"doParallax");
-    
     NSArray *visibleCells = self.visibleCells;
     
     for (UICollectionViewCell *cell in visibleCells) {
@@ -189,7 +186,6 @@ static NSString *kMoreLoaderIdentifier = @"moreLoader";
     _currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     ((NVBnbCollectionViewLayout *) self.collectionViewLayout).currentOrientation = _currentOrientation;
     [self.collectionViewLayout invalidateLayout];
-    NSLog(@"orientationChanged");
 }
 
 #pragma mark - Load more
