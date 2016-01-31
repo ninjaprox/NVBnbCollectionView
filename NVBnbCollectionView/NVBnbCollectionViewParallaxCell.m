@@ -9,7 +9,6 @@
 #import "NVBnbCollectionViewParallaxCell.h"
 
 @implementation NVBnbCollectionViewParallaxCell {
-    UIImageView *_parallaxImageView;
     NSLayoutConstraint *_parallaxImageViewWidthConstraint;
     NSLayoutConstraint *_parallaxImageViewHeightConstraint;
     NSLayoutConstraint *_parallaxImageViewCenterXConstraint;

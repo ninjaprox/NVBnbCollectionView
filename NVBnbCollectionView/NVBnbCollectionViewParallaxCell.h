@@ -14,6 +14,11 @@
 @interface NVBnbCollectionViewParallaxCell : UICollectionViewCell
 
 /**
+ *  Image view is used for parallax effect.
+ */
+@property (strong, nonatomic) UIImageView *parallaxImageView;
+
+/**
  *  Image is used for parallax effect.
  */
 @property (strong, nonatomic) UIImage *parallaxImage;
